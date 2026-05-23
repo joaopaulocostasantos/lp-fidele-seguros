@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Home, ArrowLeft, Shield } from "lucide-react";
+import { Home, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -21,14 +22,17 @@ export default function NotFound() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex items-center justify-center gap-2.5 mb-12"
+          className="flex justify-center mb-12"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#111948]">
-            <Shield className="h-4 w-4 text-white" />
-          </div>
-          <span className="text-lg font-bold text-[#111948]">
-            Fidele<span className="text-[#21A621]">.</span>
-          </span>
+          <Link href="/">
+            <Image
+              src="/logo-fidele-seguros.svg"
+              alt="Fidele Seguros"
+              width={130}
+              height={51}
+              className="h-9 w-auto"
+            />
+          </Link>
         </motion.div>
 
         {/* 404 number */}

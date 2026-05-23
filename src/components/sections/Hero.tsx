@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { gsap } from "gsap";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { AnimatedCounter } from "@/components/shared/AnimatedCounter";
 import {
@@ -16,12 +17,12 @@ import {
 } from "lucide-react";
 
 const operators = [
-  { name: "Amil", short: "AM" },
-  { name: "SulAmérica", short: "SA" },
-  { name: "Bradesco", short: "BR" },
-  { name: "Omint", short: "OM" },
-  { name: "NotreDame", short: "ND" },
-  { name: "Porto", short: "PT" },
+  { name: "Amil", short: "AM", logo: "/planos/amil.png" },
+  { name: "SulAmérica", short: "SA", logo: "/planos/sulamerica.png" },
+  { name: "Bradesco", short: "BR", logo: "/planos/bradesco-saude.png" },
+  { name: "Omint", short: "OM", logo: "/planos/omint.png" },
+  { name: "NotreDame", short: "ND", logo: null },
+  { name: "Porto", short: "PT", logo: "/planos/porto-seguro.png" },
 ];
 
 const stats = [
@@ -200,10 +201,20 @@ export function Hero() {
               {operators.map((op) => (
                 <div
                   key={op.name}
-                  className="flex items-center gap-2 rounded-xl border border-[#E4E7F0] bg-[#F7F8FC] px-4 py-2.5 text-sm font-medium text-[#111948] transition-all hover:border-[#111948]/30 hover:bg-white hover:shadow-sm"
+                  className="flex items-center gap-2 rounded-xl border border-[#E4E7F0] bg-white px-3 py-2 text-sm font-medium text-[#111948] transition-all hover:border-[#111948]/30 hover:shadow-sm"
                 >
-                  <div className="h-6 w-6 rounded-md bg-[#111948] flex items-center justify-center text-[10px] font-bold text-white">
-                    {op.short}
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-[#E4E7F0] bg-[#F7F8FC] overflow-hidden p-0.5 shrink-0">
+                    {op.logo ? (
+                      <Image
+                        src={op.logo}
+                        alt={op.name}
+                        width={24}
+                        height={24}
+                        className="h-full w-full object-contain"
+                      />
+                    ) : (
+                      <span className="text-[9px] font-bold text-[#111948]">{op.short}</span>
+                    )}
                   </div>
                   {op.name}
                 </div>

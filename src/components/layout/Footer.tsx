@@ -1,4 +1,5 @@
-import { Shield, Phone, Mail, MapPin } from "lucide-react";
+import Image from "next/image";
+import { Phone, Mail, MapPin } from "lucide-react";
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 export function Footer() {
@@ -8,13 +9,14 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10">
-                <Shield className="h-4 w-4 text-white" />
-              </div>
-              <span className="text-lg font-bold text-white tracking-tight">
-                Fidele<span className="text-[#FFCC00]">.</span>
-              </span>
+            <div className="mb-4">
+              <Image
+                src="/logo-fidele-seguros.svg"
+                alt="Fidele Seguros"
+                width={110}
+                height={43}
+                className="h-8 w-auto brightness-0 invert"
+              />
             </div>
             <p className="text-sm text-white/60 leading-relaxed max-w-xs">
               Consultoria estratégica em benefícios corporativos. Há mais de 15 anos sendo o parceiro de saúde de empresas que valorizam seus talentos.

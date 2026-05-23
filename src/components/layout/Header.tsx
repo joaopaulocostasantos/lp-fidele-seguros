@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, X, Shield } from "lucide-react";
+import { Phone, Menu, X } from "lucide-react";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -33,13 +34,15 @@ export function Header() {
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#111948] shadow-md shadow-[#111948]/20">
-            <Shield className="h-4 w-4 text-white" />
-          </div>
-          <span className="text-lg font-bold text-[#111948] tracking-tight">
-            Fidele<span className="text-[#21A621]">.</span>
-          </span>
+        <div className="flex items-center">
+          <Image
+            src="/logo-fidele-seguros.svg"
+            alt="Fidele Seguros"
+            width={110}
+            height={43}
+            priority
+            className="h-8 w-auto"
+          />
         </div>
 
         {/* Desktop nav */}

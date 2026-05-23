@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { trackFormSubmit } from "@/utils/analytics";
 import {
   CheckCircle,
