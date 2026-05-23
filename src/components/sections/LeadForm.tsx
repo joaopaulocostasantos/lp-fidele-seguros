@@ -1,0 +1,422 @@
+"use client";
+
+import { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import { useUtm } from "@/hooks/useUtm";
+import { sendLeadToWebhook } from "@/services/webhook";
+import { trackFormStart, trackLead, trackQualifiedLead } from "@/utils/analytics";
+import { formatPhone } from "@/lib/utils";
+import type { WebhookPayload } from "@/types";
+
+import {
+  Shield,
+  ArrowRight,
+  Check,
+  Loader2,
+  MessageCircle,
+} from "lucide-react";
+
+const schema = z.object({
+  name: z.string().min(3, "Informe seu nome completo"),
+  email: z.string().email("E-mail inválido"),
+  phone: z.string().min(14, "Telefone inválido"),
+  hasCnpj: z.string().min(1, "Selecione uma opção"),
+  companySize: z.string().min(1, "Selecione o número de vidas"),
+  cnpjType: z.string().min(1, "Selecione o tipo de CNPJ"),
+  currentOperator: z.string().min(1, "Selecione sua operadora atual"),
+  mainPain: z.string().min(1, "Selecione sua principal dor"),
+});
+
+type FormData = z.infer<typeof schema>;
+
+const trustItems = [
+  "Análise gratuita e sem compromisso",
+  "Retorno em até 24h úteis",
+  "Seus dados 100% protegidos (LGPD)",
+  "+300 empresas já atendidas",
+];
+
+export function LeadForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+  const utms = useUtm();
+  const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+    setValue,
+    watch,
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
+
+  const handleFormStart = () => {
+    if (!hasStarted) {
+      setHasStarted(true);
+      trackFormStart();
+    }
+  };
+
+  const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true);
+    try {
+      const payload: WebhookPayload = {
+        ...data,
+        utms,
+        timestamp: new Date().toISOString(),
+        page_url: window.location.href,
+      };
+
+      await sendLeadToWebhook(payload);
+
+      // Determine if qualified lead
+      const isQualified =
+        data.hasCnpj === "sim" &&
+        !["menos-5", "nao-sei"].includes(data.companySize);
+
+      trackLead({ value: isQualified ? "qualified" : "standard" });
+      if (isQualified) trackQualifiedLead(payload as unknown as Record<string, unknown>);
+
+      router.push("/obrigado");
+    } catch (err) {
+      console.error("Form submission error:", err);
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <section
+      id="formulario"
+      className="relative py-24 overflow-hidden"
+    >
+      {/* Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/15 to-transparent" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[800px] w-[800px] rounded-full bg-blue-600/8 blur-[150px]" />
+      </div>
+
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-10 text-center"
+          >
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/25 bg-blue-500/10 px-4 py-1.5 text-sm text-blue-300">
+              <Shield className="h-3.5 w-3.5" />
+              Consultoria gratuita
+            </div>
+            <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
+              Fale com um especialista{" "}
+              <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                da Fidele.
+              </span>
+            </h2>
+            <p className="mt-4 text-lg text-slate-400 max-w-xl mx-auto">
+              Preencha o formulário e receba uma análise gratuita do seu plano atual com recomendações personalizadas.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+            {/* Form card */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-3 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-6 md:p-8"
+            >
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                onFocus={handleFormStart}
+                noValidate
+                className="space-y-5"
+              >
+                {/* Name */}
+                <div className="space-y-1.5">
+                  <Label htmlFor="name">Nome completo *</Label>
+                  <Input
+                    id="name"
+                    placeholder="Ana Beatriz Santos"
+                    error={errors.name?.message}
+                    {...register("name")}
+                  />
+                </div>
+
+                {/* Email + Phone */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="email">E-mail corporativo *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="ana@empresa.com.br"
+                      error={errors.email?.message}
+                      {...register("email")}
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="phone">WhatsApp *</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="(11) 9 9999-9999"
+                      error={errors.phone?.message}
+                      {...register("phone")}
+                      onChange={(e) => {
+                        const formatted = formatPhone(e.target.value);
+                        setValue("phone", formatted, { shouldValidate: !!watch("phone") });
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Has CNPJ */}
+                <div className="space-y-1.5">
+                  <Label>Sua empresa possui CNPJ ativo? *</Label>
+                  <Controller
+                    name="hasCnpj"
+                    control={control}
+                    render={({ field }) => (
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <SelectTrigger error={errors.hasCnpj?.message}>
+                          <SelectValue placeholder="Selecione uma opção" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="sim">Sim, possuo CNPJ ativo</SelectItem>
+                          <SelectItem value="nao">Não, ainda não tenho</SelectItem>
+                          <SelectItem value="em-abertura">Estou em processo de abertura</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                </div>
+
+                {/* Company size + CNPJ type */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <Label>Quantas vidas na empresa? *</Label>
+                    <Controller
+                      name="companySize"
+                      control={control}
+                      render={({ field }) => (
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <SelectTrigger error={errors.companySize?.message}>
+                            <SelectValue placeholder="Selecione" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="menos-5">Menos de 5 vidas</SelectItem>
+                            <SelectItem value="5-10">5 a 10 vidas</SelectItem>
+                            <SelectItem value="11-30">11 a 30 vidas</SelectItem>
+                            <SelectItem value="31-50">31 a 50 vidas</SelectItem>
+                            <SelectItem value="51-100">51 a 100 vidas</SelectItem>
+                            <SelectItem value="mais-100">Mais de 100 vidas</SelectItem>
+                            <SelectItem value="nao-sei">Não sei ao certo</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label>Tipo do CNPJ *</Label>
+                    <Controller
+                      name="cnpjType"
+                      control={control}
+                      render={({ field }) => (
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <SelectTrigger error={errors.cnpjType?.message}>
+                            <SelectValue placeholder="Selecione" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="ltda">LTDA / SRL</SelectItem>
+                            <SelectItem value="sa">S/A</SelectItem>
+                            <SelectItem value="mei">MEI</SelectItem>
+                            <SelectItem value="eireli">EIRELI</SelectItem>
+                            <SelectItem value="slu">SLU</SelectItem>
+                            <SelectItem value="outro">Outro</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                  </div>
+                </div>
+
+                {/* Current operator */}
+                <div className="space-y-1.5">
+                  <Label>Operadora atual *</Label>
+                  <Controller
+                    name="currentOperator"
+                    control={control}
+                    render={({ field }) => (
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <SelectTrigger error={errors.currentOperator?.message}>
+                          <SelectValue placeholder="Selecione sua operadora" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="amil">Amil</SelectItem>
+                          <SelectItem value="sulamerica">SulAmérica</SelectItem>
+                          <SelectItem value="bradesco">Bradesco Saúde</SelectItem>
+                          <SelectItem value="omint">Omint</SelectItem>
+                          <SelectItem value="notredame">NotreDame Intermédica</SelectItem>
+                          <SelectItem value="porto">Porto Saúde</SelectItem>
+                          <SelectItem value="unimed">Unimed</SelectItem>
+                          <SelectItem value="hapvida">Hapvida</SelectItem>
+                          <SelectItem value="outro">Outra operadora</SelectItem>
+                          <SelectItem value="nenhuma">Não possuo plano atualmente</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                </div>
+
+                {/* Main pain */}
+                <div className="space-y-1.5">
+                  <Label>Principal dor com o plano atual *</Label>
+                  <Controller
+                    name="mainPain"
+                    control={control}
+                    render={({ field }) => (
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <SelectTrigger error={errors.mainPain?.message}>
+                          <SelectValue placeholder="Selecione sua maior dificuldade" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="custo-alto">Custo muito alto</SelectItem>
+                          <SelectItem value="atendimento-ruim">Atendimento ruim da operadora</SelectItem>
+                          <SelectItem value="suporte-corretor">Falta de suporte do corretor</SelectItem>
+                          <SelectItem value="rede-limitada">Rede hospitalar limitada</SelectItem>
+                          <SelectItem value="rh-sobrecarregado">RH sobrecarregado</SelectItem>
+                          <SelectItem value="colaboradores-insatisfeitos">Colaboradores insatisfeitos</SelectItem>
+                          <SelectItem value="reajuste-alto">Reajuste acima do esperado</SelectItem>
+                          <SelectItem value="burocratico">Processo muito burocrático</SelectItem>
+                          <SelectItem value="sem-plano">Preciso contratar um plano</SelectItem>
+                          <SelectItem value="outro">Outro motivo</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                </div>
+
+                {/* Privacy notice */}
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  Ao enviar, você concorda com nossa{" "}
+                  <a href="#" className="text-blue-400 hover:underline">
+                    Política de Privacidade
+                  </a>{" "}
+                  e autoriza o contato por WhatsApp/e-mail. Seus dados são protegidos pela LGPD.
+                </p>
+
+                {/* Submit */}
+                <Button
+                  type="submit"
+                  variant="premium"
+                  size="xl"
+                  disabled={isSubmitting}
+                  className="w-full group"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Enviando sua solicitação...
+                    </>
+                  ) : (
+                    <>
+                      <MessageCircle className="h-5 w-5" />
+                      Solicitar consultoria gratuita
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </>
+                  )}
+                </Button>
+              </form>
+            </motion.div>
+
+            {/* Trust sidebar */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="lg:col-span-2 space-y-4"
+            >
+              {/* Trust card */}
+              <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-6">
+                <h3 className="text-base font-semibold text-white mb-4">
+                  Por que preencher?
+                </h3>
+                <ul className="space-y-3">
+                  {trustItems.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm text-slate-300">
+                      <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-500/20">
+                        <Check className="h-3 w-3 text-blue-400" />
+                      </div>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Process preview */}
+              <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-6">
+                <h3 className="text-sm font-semibold text-white mb-4">
+                  O que acontece depois?
+                </h3>
+                <ol className="space-y-3">
+                  {[
+                    "Recebemos seu formulário",
+                    "Consultor entra em contato em até 24h",
+                    "Diagnóstico gratuito do seu plano",
+                    "Apresentamos as melhores alternativas",
+                  ].map((step, i) => (
+                    <li key={step} className="flex items-start gap-3">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-blue-500/30 text-[11px] font-bold text-blue-400">
+                        {i + 1}
+                      </span>
+                      <span className="text-sm text-slate-400">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              {/* WhatsApp CTA */}
+              <a
+                href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20planos%20de%20sa%C3%BAde%20empresariais."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2.5 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm font-medium text-emerald-300 hover:bg-emerald-500/15 transition-colors"
+              >
+                <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+                Prefere falar pelo WhatsApp?
+              </a>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

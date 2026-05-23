@@ -1,36 +1,162 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fidele Seguros — Landing Page Premium
 
-## Getting Started
+Landing page de alta performance para captação de leads qualificados de planos de saúde empresariais. Desenvolvida com foco em CRO, UX premium e engenharia frontend moderna.
 
-First, run the development server:
+---
+
+## Stack
+
+| Tecnologia | Versão | Uso |
+|---|---|---|
+| Next.js | 16 (App Router) | Framework principal |
+| TypeScript | 5 | Tipagem estática |
+| TailwindCSS | 4 | Estilização |
+| Framer Motion | 12 | Microinterações e animações |
+| GSAP | 3 | Hero animations, parallax |
+| Shadcn UI | latest | Componentes UI base |
+| Lucide React | latest | Ícones |
+| React Icons | 5 | Ícones complementares |
+| React Hook Form | 7 | Gerenciamento de formulário |
+| Zod | 4 | Validação de schema |
+| Radix UI | latest | Componentes acessíveis |
+
+---
+
+## Instalação
+
+```bash
+git clone https://github.com/joaopaulocostasantos/lp-fidele-seguros.git
+cd lp-fidele-seguros
+npm install
+```
+
+## Configuração
+
+```bash
+cp .env.example .env.local
+# Edite .env.local com seus valores
+```
+
+## Rodar localmente
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Acesse http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Build de produção
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Variáveis de Ambiente
 
-To learn more about Next.js, take a look at the following resources:
+| Variável | Descrição | Obrigatório |
+|---|---|---|
+| `NEXT_PUBLIC_WEBHOOK_URL` | URL do webhook (N8N, HubSpot, etc.) | Sim |
+| `NEXT_PUBLIC_META_PIXEL_ID` | ID do Meta Pixel (Facebook Ads) | Não |
+| `NEXT_PUBLIC_GOOGLE_ADS_ID` | ID do Google Ads / GA4 | Não |
+| `NEXT_PUBLIC_SITE_URL` | URL base do site | Não |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Estrutura de Pastas
 
-## Deploy on Vercel
+```
+src/
+├── app/
+│   ├── globals.css          # Estilos globais e variáveis CSS
+│   ├── layout.tsx           # Layout root com metadata SEO e JSON-LD
+│   ├── page.tsx             # Página principal (landing page)
+│   ├── not-found.tsx        # Página 404 premium
+│   └── obrigado/
+│       └── page.tsx         # Página de confirmação pós-lead
+│
+├── components/
+│   ├── ui/                  # Componentes base (Button, Input, Select, etc.)
+│   ├── layout/
+│   │   ├── Header.tsx       # Navbar com scroll behavior
+│   │   └── Footer.tsx       # Rodapé com contatos e links
+│   ├── sections/
+│   │   ├── Hero.tsx         # Hero section com GSAP + Framer Motion
+│   │   ├── Problems.tsx     # Seção de dores do mercado
+│   │   ├── Solution.tsx     # Solução Fidele + comparativo
+│   │   ├── Partners.tsx     # Operadoras parceiras
+│   │   ├── Benefits.tsx     # Benefícios corporativos com métricas
+│   │   ├── SocialProof.tsx  # Depoimentos e prova social
+│   │   ├── Process.tsx      # Processo consultivo em etapas
+│   │   ├── LeadForm.tsx     # Formulário de captação otimizado
+│   │   └── ThankYouContent.tsx # Conteúdo da página de obrigado
+│   └── shared/
+│       ├── AnimatedCounter.tsx  # Contador animado
+│       ├── GlowCard.tsx         # Card reutilizável com glow effect
+│       └── StickyCtaMobile.tsx  # CTA sticky para mobile
+│
+├── hooks/
+│   └── useUtm.ts            # Captura automática de UTMs da URL
+│
+├── services/
+│   └── webhook.ts           # Envio para webhook com retry automático
+│
+├── utils/
+│   └── analytics.ts         # Eventos Meta Pixel + Google Ads
+│
+├── lib/
+│   └── utils.ts             # cn(), formatPhone(), formatCNPJ()
+│
+└── types/
+    └── index.ts             # Types TypeScript globais
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy na Vercel
+
+```bash
+npm i -g vercel
+vercel --prod
+```
+
+Configure as variáveis em **Settings → Environment Variables** no dashboard.
+
+---
+
+## Integrações
+
+### Webhook (Lead Delivery)
+
+Payload enviado automaticamente a cada lead:
+
+```json
+{
+  "name": "string",
+  "email": "string",
+  "phone": "string",
+  "hasCnpj": "string",
+  "companySize": "string",
+  "cnpjType": "string",
+  "currentOperator": "string",
+  "mainPain": "string",
+  "utms": { "utm_source": "...", "utm_medium": "...", "utm_campaign": "..." },
+  "timestamp": "ISO 8601",
+  "page_url": "string"
+}
+```
+
+### Eventos de Conversão
+
+| Evento | Quando dispara |
+|---|---|
+| `PageView` | Carregamento da página |
+| `FormStart` | Usuário foca no primeiro campo |
+| `Lead` | Formulário enviado |
+| `FormSubmit` | Redirecionado para /obrigado |
+| `QualifiedLead` | Lead com CNPJ ativo e 5+ vidas |
+
+---
+
+© 2024 Fidele Corretora de Seguros. Todos os direitos reservados.
