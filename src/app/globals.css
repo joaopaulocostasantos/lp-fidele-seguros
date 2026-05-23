@@ -1,10 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #040713;
-  --foreground: #f1f5f9;
-  --muted: #94a3b8;
-  --border: rgba(255, 255, 255, 0.08);
+  --brand: #111948;
+  --accent: #FFCC00;
+  --cta: #21A621;
+  --dark: #1C1C1C;
+  --background: #FFFFFF;
+  --foreground: #1C1C1C;
+  --muted: #64748b;
+  --surface: #F7F8FC;
+  --border: #E4E7F0;
 }
 
 @theme inline {
@@ -12,6 +17,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-brand: var(--brand);
+  --color-accent: var(--accent);
+  --color-cta: var(--cta);
 }
 
 html {
@@ -28,29 +36,26 @@ body {
   overflow-x: hidden;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0f1e;
+  background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e3a5f;
+  background: #111948;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2563eb;
+  background: #21A621;
 }
 
-/* Selection */
 ::selection {
-  background: rgba(37, 99, 235, 0.3);
-  color: #fff;
+  background: rgba(17, 25, 72, 0.15);
+  color: #111948;
 }
 
-/* Focus ring */
 *:focus-visible {
-  outline: 2px solid rgba(59, 130, 246, 0.6);
+  outline: 2px solid rgba(33, 166, 33, 0.5);
   outline-offset: 2px;
 }

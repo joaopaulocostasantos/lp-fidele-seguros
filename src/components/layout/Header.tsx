@@ -27,33 +27,46 @@ export function Header() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "border-b border-white/8 bg-slate-950/90 backdrop-blur-xl shadow-xl shadow-black/20"
-          : "bg-transparent"
+          ? "border-b border-[#E4E7F0] bg-white/95 backdrop-blur-xl shadow-sm"
+          : "bg-white/80 backdrop-blur-sm"
       }`}
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
         <div className="flex items-center gap-2.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 shadow-lg shadow-blue-600/30">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#111948] shadow-md shadow-[#111948]/20">
             <Shield className="h-4 w-4 text-white" />
           </div>
-          <span className="text-lg font-bold text-white tracking-tight">
-            Fidele<span className="text-blue-400">.</span>
+          <span className="text-lg font-bold text-[#111948] tracking-tight">
+            Fidele<span className="text-[#21A621]">.</span>
           </span>
         </div>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6 text-sm text-slate-400">
-          <button onClick={() => scrollTo("solucao")} className="hover:text-white transition-colors">Solução</button>
-          <button onClick={() => scrollTo("operadoras")} className="hover:text-white transition-colors">Operadoras</button>
-          <button onClick={() => scrollTo("beneficios")} className="hover:text-white transition-colors">Benefícios</button>
-          <button onClick={() => scrollTo("processo")} className="hover:text-white transition-colors">Como funciona</button>
-          <button onClick={() => scrollTo("depoimentos")} className="hover:text-white transition-colors">Depoimentos</button>
+        <nav className="hidden md:flex items-center gap-6 text-sm text-slate-500">
+          {[
+            { label: "Solução", id: "solucao" },
+            { label: "Operadoras", id: "operadoras" },
+            { label: "Benefícios", id: "beneficios" },
+            { label: "Como funciona", id: "processo" },
+            { label: "Depoimentos", id: "depoimentos" },
+          ].map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className="hover:text-[#111948] font-medium transition-colors"
+            >
+              {item.label}
+            </button>
+          ))}
         </nav>
 
         {/* Desktop CTAs */}
         <div className="hidden md:flex items-center gap-3">
-          <a href="tel:+5511999999999" className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors">
+          <a
+            href="tel:+5511999999999"
+            className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-[#111948] font-medium transition-colors"
+          >
             <Phone className="h-4 w-4" />
             (11) 9 9999-9999
           </a>
@@ -68,7 +81,7 @@ export function Header() {
 
         {/* Mobile menu toggle */}
         <button
-          className="md:hidden text-slate-400 hover:text-white transition-colors"
+          className="md:hidden text-[#111948] hover:text-[#21A621] transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Menu"
         >
@@ -81,7 +94,7 @@ export function Header() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden border-t border-white/8 bg-slate-950/98 backdrop-blur-xl px-4 py-4 flex flex-col gap-4"
+          className="md:hidden border-t border-[#E4E7F0] bg-white px-4 py-4 flex flex-col gap-4 shadow-lg"
         >
           {[
             { label: "Solução", id: "solucao" },
@@ -93,7 +106,7 @@ export function Header() {
             <button
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className="text-left text-slate-300 hover:text-white py-1 transition-colors"
+              className="text-left text-[#1C1C1C] hover:text-[#111948] font-medium py-1 transition-colors"
             >
               {item.label}
             </button>

@@ -21,9 +21,9 @@ const benefits = [
       "Empresas com benefícios de saúde premium retêm até 3x mais talentos do que a concorrência.",
     metric: "3x",
     metricLabel: "mais retenção",
-    color: "text-amber-400",
-    bg: "bg-amber-400/10",
-    border: "border-amber-400/20",
+    iconBg: "bg-amber-50",
+    iconColor: "text-amber-500",
+    metricColor: "text-amber-500",
   },
   {
     icon: TrendingDown,
@@ -32,9 +32,9 @@ const benefits = [
       "Benefícios estratégicos reduzem drasticamente o custo de rotatividade e substituição de colaboradores.",
     metric: "40%",
     metricLabel: "menos turnover",
-    color: "text-emerald-400",
-    bg: "bg-emerald-400/10",
-    border: "border-emerald-400/20",
+    iconBg: "bg-[#21A621]/10",
+    iconColor: "text-[#21A621]",
+    metricColor: "text-[#21A621]",
   },
   {
     icon: Heart,
@@ -43,9 +43,9 @@ const benefits = [
       "Colaboradores com plano premium buscam cuidados preventivos, reduzindo absenteísmo e afastamentos.",
     metric: "65%",
     metricLabel: "menos ausências",
-    color: "text-pink-400",
-    bg: "bg-pink-400/10",
-    border: "border-pink-400/20",
+    iconBg: "bg-pink-50",
+    iconColor: "text-pink-500",
+    metricColor: "text-pink-500",
   },
   {
     icon: Star,
@@ -54,20 +54,20 @@ const benefits = [
       "Employer branding poderoso atrai candidatos melhores e posiciona sua empresa como destino de carreira.",
     metric: "#1",
     metricLabel: "diferencial citado",
-    color: "text-blue-400",
-    bg: "bg-blue-400/10",
-    border: "border-blue-400/20",
+    iconBg: "bg-[#111948]/8",
+    iconColor: "text-[#111948]",
+    metricColor: "text-[#111948]",
   },
   {
     icon: Briefcase,
     title: "Suporte operacional ao RH",
     description:
-      "Seu RH deixa de ser o \"help desk\" do plano de saúde e volta a focar em estratégia e cultura.",
+      "Seu RH deixa de ser o 'help desk' do plano de saúde e volta a focar em estratégia e cultura.",
     metric: "20h",
     metricLabel: "salvas por mês",
-    color: "text-indigo-400",
-    bg: "bg-indigo-400/10",
-    border: "border-indigo-400/20",
+    iconBg: "bg-indigo-50",
+    iconColor: "text-indigo-500",
+    metricColor: "text-indigo-500",
   },
   {
     icon: Clock,
@@ -76,9 +76,9 @@ const benefits = [
       "Autorizações, reembolsos e inclusões resolvidas em tempo recorde com nossa equipe dedicada.",
     metric: "2h",
     metricLabel: "tempo de resposta",
-    color: "text-cyan-400",
-    bg: "bg-cyan-400/10",
-    border: "border-cyan-400/20",
+    iconBg: "bg-cyan-50",
+    iconColor: "text-cyan-500",
+    metricColor: "text-cyan-500",
   },
   {
     icon: ShieldCheck,
@@ -87,9 +87,9 @@ const benefits = [
       "Conformidade total com ANS, LGPD e legislação trabalhista. Sua empresa protegida em todas as frentes.",
     metric: "100%",
     metricLabel: "compliance",
-    color: "text-violet-400",
-    bg: "bg-violet-400/10",
-    border: "border-violet-400/20",
+    iconBg: "bg-[#21A621]/10",
+    iconColor: "text-[#21A621]",
+    metricColor: "text-[#21A621]",
   },
   {
     icon: Smile,
@@ -98,9 +98,9 @@ const benefits = [
       "Colaboradores satisfeitos com seus benefícios têm índices de engajamento e produtividade mais altos.",
     metric: "87%",
     metricLabel: "mais engajamento",
-    color: "text-orange-400",
-    bg: "bg-orange-400/10",
-    border: "border-orange-400/20",
+    iconBg: "bg-orange-50",
+    iconColor: "text-orange-500",
+    metricColor: "text-orange-500",
   },
 ];
 
@@ -113,13 +113,7 @@ const impactMetrics = [
 
 export function Benefits() {
   return (
-    <section id="beneficios" className="relative py-24 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-        <div className="absolute top-1/3 right-0 h-[600px] w-[600px] translate-x-1/2 rounded-full bg-blue-600/6 blur-[120px]" />
-      </div>
-
+    <section id="beneficios" className="relative py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <motion.div
@@ -129,17 +123,18 @@ export function Benefits() {
           transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-4 py-1.5 text-sm text-emerald-300">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#21A621]/20 bg-[#21A621]/8 px-4 py-1.5 text-sm text-[#21A621] font-medium">
             <TrendingDown className="h-3.5 w-3.5" />
             Impacto no seu negócio
           </div>
-          <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
+          <h2 className="text-3xl font-bold text-[#111948] md:text-4xl lg:text-5xl">
             Saúde premium que{" "}
-            <span className="bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="relative inline-block text-[#21A621]">
               gera resultado real.
+              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#FFCC00]" />
             </span>
           </h2>
-          <p className="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">
+          <p className="mt-6 text-lg text-slate-500 max-w-2xl mx-auto">
             Investir em saúde corporativa premium não é custo — é estratégia de
             negócio. Veja o impacto concreto nas empresas que escolheram a Fidele.
           </p>
@@ -151,14 +146,14 @@ export function Benefits() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16 grid grid-cols-2 lg:grid-cols-4 gap-4"
+          className="mb-16 grid grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl border border-[#E4E7F0] bg-[#E4E7F0] overflow-hidden shadow-sm"
         >
           {impactMetrics.map((metric) => (
             <div
               key={metric.label}
-              className="text-center rounded-2xl border border-white/8 bg-white/[0.03] p-6"
+              className="flex flex-col items-center justify-center gap-1 bg-white p-6 text-center hover:bg-[#F7F8FC] transition-colors"
             >
-              <div className="text-3xl font-bold text-white mb-1">
+              <div className="text-3xl font-bold text-[#111948]">
                 <AnimatedCounter end={Number(metric.value)} suffix={metric.suffix} />
               </div>
               <div className="text-sm text-slate-400">{metric.label}</div>
@@ -175,18 +170,18 @@ export function Benefits() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.07 }}
-              className="group relative overflow-hidden rounded-2xl border border-white/8 bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.04]"
+              className="group rounded-2xl border border-[#E4E7F0] bg-white p-5 transition-all duration-300 hover:border-[#111948]/20 hover:shadow-md hover:-translate-y-0.5"
             >
-              <div className={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl ${benefit.bg} border ${benefit.border}`}>
-                <benefit.icon className={`h-5 w-5 ${benefit.color}`} />
+              <div className={`mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl ${benefit.iconBg}`}>
+                <benefit.icon className={`h-5 w-5 ${benefit.iconColor}`} />
               </div>
 
-              <div className={`mb-3 text-2xl font-bold ${benefit.color}`}>
+              <div className={`mb-2 text-2xl font-bold ${benefit.metricColor}`}>
                 {benefit.metric}
-                <span className="ml-1 text-xs font-medium text-slate-500">{benefit.metricLabel}</span>
+                <span className="ml-1 text-xs font-medium text-slate-400">{benefit.metricLabel}</span>
               </div>
 
-              <h3 className="text-sm font-semibold text-white mb-2">{benefit.title}</h3>
+              <h3 className="text-sm font-semibold text-[#111948] mb-1.5">{benefit.title}</h3>
               <p className="text-xs text-slate-400 leading-relaxed">{benefit.description}</p>
             </motion.div>
           ))}

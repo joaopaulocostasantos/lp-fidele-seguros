@@ -9,6 +9,7 @@ import {
   HeartHandshake,
   ArrowRight,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const steps = [
   {
@@ -55,11 +56,7 @@ const steps = [
 
 export function Process() {
   return (
-    <section id="processo" className="relative py-24 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-y-0 left-0 right-0 h-full bg-gradient-to-b from-transparent via-blue-950/10 to-transparent" />
-      </div>
-
+    <section id="processo" className="relative py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <motion.div
@@ -69,72 +66,52 @@ export function Process() {
           transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/25 bg-blue-500/10 px-4 py-1.5 text-sm text-blue-300">
-            <Rocket className="h-3.5 w-3.5" />
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#111948]/15 bg-[#111948]/6 px-4 py-1.5 text-sm text-[#111948] font-medium">
+            <Rocket className="h-3.5 w-3.5 text-[#FFCC00]" />
             Como funciona
           </div>
-          <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
+          <h2 className="text-3xl font-bold text-[#111948] md:text-4xl lg:text-5xl">
             Processo consultivo{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
-              em 5 etapas.
-            </span>
+            <span className="text-[#21A621]">em 5 etapas.</span>
           </h2>
-          <p className="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
             Da primeira conversa ao suporte permanente. Um processo transparente,
             ágil e focado no resultado da sua empresa.
           </p>
         </motion.div>
 
-        {/* Steps - vertical timeline on mobile, horizontal on desktop */}
-        <div className="relative">
-          {/* Desktop: horizontal connector */}
-          <div className="hidden lg:block absolute top-[52px] left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        {/* Steps */}
+        <div className="relative max-w-4xl mx-auto">
+          {/* Vertical connector (desktop) */}
+          <div className="hidden lg:block absolute left-[52px] top-12 bottom-12 w-0.5 bg-gradient-to-b from-[#111948]/20 via-[#111948]/10 to-transparent" />
 
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
+          <div className="space-y-4">
             {steps.map((step, i) => (
               <motion.div
                 key={step.number}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="relative flex flex-col"
+                className="group relative flex gap-5 items-start"
               >
-                {/* Mobile: connecting line */}
-                {i < steps.length - 1 && (
-                  <div className="lg:hidden absolute left-6 top-12 h-full w-px bg-gradient-to-b from-blue-500/30 to-transparent ml-0" />
-                )}
+                {/* Step icon */}
+                <div className="relative z-10 flex h-[72px] w-[72px] shrink-0 flex-col items-center justify-center rounded-2xl border-2 border-[#111948]/10 bg-white shadow-md shadow-[#111948]/8 group-hover:border-[#111948] group-hover:bg-[#111948] transition-all duration-300">
+                  <step.icon className="h-6 w-6 text-[#111948] group-hover:text-[#FFCC00] transition-colors" />
+                  <span className="text-[10px] font-bold text-slate-400 group-hover:text-white/60 transition-colors mt-1">{step.number}</span>
+                </div>
 
-                <div className="flex lg:flex-col items-start lg:items-center gap-4 lg:gap-0">
-                  {/* Icon circle */}
-                  <div className="relative flex h-12 w-12 lg:h-14 lg:w-14 shrink-0 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10 lg:mb-6 z-10">
-                    <step.icon className="h-5 w-5 lg:h-6 lg:w-6 text-blue-400" />
-                    <div className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-[10px] font-bold text-white">
-                      {i + 1}
-                    </div>
-                  </div>
-
-                  {/* Arrow between steps (desktop) */}
-                  {i < steps.length - 1 && (
-                    <ArrowRight className="hidden lg:block absolute right-0 top-1/2 -translate-y-[200%] translate-x-1/2 h-4 w-4 text-slate-600 z-20" />
-                  )}
-
-                  {/* Content */}
-                  <div className="flex-1 lg:text-center pb-6 lg:pb-0">
-                    <div className="text-xs font-mono font-bold text-blue-400/60 mb-1">
-                      {step.number}
-                    </div>
-                    <h3 className="text-sm font-semibold text-white mb-2">
+                {/* Content */}
+                <div className="flex-1 rounded-2xl border border-[#E4E7F0] bg-white p-5 shadow-sm transition-all duration-300 group-hover:border-[#111948]/20 group-hover:shadow-md">
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <h3 className="text-base font-semibold text-[#111948]">
                       {step.title}
                     </h3>
-                    <p className="text-xs text-slate-400 leading-relaxed mb-3">
-                      {step.description}
-                    </p>
-                    <div className="inline-flex items-center gap-1.5 rounded-lg border border-white/8 bg-white/[0.03] px-2.5 py-1 text-[11px] text-slate-500">
-                      <span className="h-1 w-1 rounded-full bg-blue-400/60" />
+                    <span className="shrink-0 text-xs text-slate-400 bg-[#F7F8FC] border border-[#E4E7F0] px-2.5 py-1 rounded-full font-medium">
                       {step.duration}
-                    </div>
+                    </span>
                   </div>
+                  <p className="text-sm text-slate-500 leading-relaxed">{step.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -149,14 +126,16 @@ export function Process() {
           transition={{ duration: 0.6 }}
           className="mt-16 text-center"
         >
-          <button
+          <Button
+            variant="premium"
+            size="xl"
+            className="group"
             onClick={() => document.getElementById("formulario")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-blue-600/25 hover:shadow-blue-500/40 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
           >
             Iniciar meu diagnóstico gratuito
-            <ArrowRight className="h-4 w-4" />
-          </button>
-          <p className="mt-3 text-sm text-slate-500">
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Button>
+          <p className="mt-3 text-sm text-slate-400">
             Sem compromisso. Análise gratuita em até 48h.
           </p>
         </motion.div>

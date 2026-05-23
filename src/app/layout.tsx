@@ -82,7 +82,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#040713",
+  themeColor: "#111948",
 };
 
 const jsonLd = {
@@ -166,7 +166,7 @@ export default function RootLayout({
           </>
         )}
       </head>
-      <body className="min-h-full flex flex-col bg-[#040713]">
+      <body className="min-h-full flex flex-col bg-white">
         {children}
         <StickyCtaMobile />
       </body>

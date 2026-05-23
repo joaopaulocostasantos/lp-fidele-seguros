@@ -28,7 +28,7 @@ export function StickyCtaMobile() {
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="fixed bottom-0 left-0 right-0 z-50 p-4 md:hidden"
         >
-          <div className="rounded-2xl border border-white/10 bg-slate-950/95 p-3 backdrop-blur-xl shadow-2xl shadow-black/50">
+          <div className="rounded-2xl border border-[#E4E7F0] bg-white p-3 shadow-2xl shadow-black/15">
             <Button
               variant="premium"
               size="lg"
