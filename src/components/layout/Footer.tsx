@@ -4,7 +4,7 @@ import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 export function Footer() {
   return (
-    <footer className="bg-[#111948] py-14">
+    <footer className="bg-black py-14">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
           {/* Brand */}
@@ -15,6 +15,7 @@ export function Footer() {
                 alt="Fidele Seguros"
                 width={110}
                 height={43}
+                unoptimized
                 className="h-8 w-auto brightness-0 invert"
               />
             </div>

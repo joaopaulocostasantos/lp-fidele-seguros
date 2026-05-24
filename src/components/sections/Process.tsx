@@ -93,18 +93,18 @@ export function Process() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group relative flex gap-5 items-start"
+                className="group relative flex gap-3 md:gap-5 items-start"
               >
                 {/* Step icon */}
-                <div className="relative z-10 flex h-[72px] w-[72px] shrink-0 flex-col items-center justify-center rounded-2xl border-2 border-[#111948]/10 bg-white shadow-md shadow-[#111948]/8 group-hover:border-[#111948] group-hover:bg-[#111948] transition-all duration-300">
+                <div className="relative z-10 flex h-14 w-14 md:h-[72px] md:w-[72px] shrink-0 flex-col items-center justify-center rounded-2xl border-2 border-[#111948]/10 bg-white shadow-md shadow-[#111948]/8 group-hover:border-[#111948] group-hover:bg-[#111948] transition-all duration-300">
                   <step.icon className="h-6 w-6 text-[#111948] group-hover:text-[#FFCC00] transition-colors" />
                   <span className="text-[10px] font-bold text-slate-400 group-hover:text-white/60 transition-colors mt-1">{step.number}</span>
                 </div>
 
                 {/* Content */}
                 <div className="flex-1 rounded-2xl border border-[#E4E7F0] bg-white p-5 shadow-sm transition-all duration-300 group-hover:border-[#111948]/20 group-hover:shadow-md">
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <h3 className="text-base font-semibold text-[#111948]">
+                  <div className="flex flex-wrap items-start gap-x-2 gap-y-1 mb-2">
+                    <h3 className="text-base font-semibold text-[#111948] flex-1 min-w-0">
                       {step.title}
                     </h3>
                     <span className="shrink-0 text-xs text-slate-400 bg-[#F7F8FC] border border-[#E4E7F0] px-2.5 py-1 rounded-full font-medium">

@@ -110,7 +110,7 @@ export function SocialProof() {
           </p>
 
           {/* Global rating */}
-          <div className="mt-6 inline-flex items-center gap-3 rounded-2xl border border-[#E4E7F0] bg-white px-6 py-3 shadow-sm">
+          <div className="mt-6 inline-flex items-center gap-2 sm:gap-3 rounded-2xl border border-[#E4E7F0] bg-white px-4 sm:px-6 py-3 shadow-sm">
             <StarRating count={5} />
             <div className="h-4 w-px bg-[#E4E7F0]" />
             <span className="text-sm font-bold text-[#111948]">4.9/5</span>

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -41,6 +41,7 @@ export function Header() {
             width={110}
             height={43}
             priority
+            unoptimized
             className="h-8 w-auto"
           />
         </div>
@@ -66,13 +67,6 @@ export function Header() {
 
         {/* Desktop CTAs */}
         <div className="hidden md:flex items-center gap-3">
-          <a
-            href="tel:+5511999999999"
-            className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-[#111948] font-medium transition-colors"
-          >
-            <Phone className="h-4 w-4" />
-            (11) 9 9999-9999
-          </a>
           <Button
             variant="premium"
             size="sm"

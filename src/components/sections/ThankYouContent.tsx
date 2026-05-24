@@ -3,13 +3,11 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import { trackFormSubmit } from "@/utils/analytics";
 import {
   CheckCircle,
   Clock,
   MessageCircle,
-  Phone,
   ArrowLeft,
   Star,
   Calendar,
@@ -170,24 +168,14 @@ export function ThankYouContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-3 justify-center"
+            className="flex justify-center"
           >
-            <a
-              href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20acabei%20de%20preencher%20o%20formul%C3%A1rio%20no%20site%20e%20gostaria%20de%20falar%20com%20um%20consultor."
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href="/#formulario">
               <Button variant="premium" size="lg" className="w-full sm:w-auto">
                 <MessageCircle className="h-5 w-5" />
-                Falar pelo WhatsApp agora
+                Solicitar outra consultoria
               </Button>
-            </a>
-            <a href="tel:+5511999999999">
-              <Button variant="brand" size="lg" className="w-full sm:w-auto">
-                <Phone className="h-4 w-4" />
-                Ligar agora
-              </Button>
-            </a>
+            </Link>
           </motion.div>
 
           {/* Back link */}

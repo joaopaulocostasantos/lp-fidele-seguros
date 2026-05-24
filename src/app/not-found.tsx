@@ -30,6 +30,7 @@ export default function NotFound() {
               alt="Fidele Seguros"
               width={130}
               height={51}
+              unoptimized
               className="h-9 w-auto"
             />
           </Link>

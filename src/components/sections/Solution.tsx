@@ -129,7 +129,8 @@ export function Solution() {
             Fidele vs. Corretora tradicional
           </h3>
 
-          <div className="mx-auto max-w-2xl overflow-hidden rounded-2xl border border-[#E4E7F0] shadow-sm">
+          <div className="overflow-x-auto">
+          <div className="min-w-[360px] mx-auto max-w-2xl overflow-hidden rounded-2xl border border-[#E4E7F0] shadow-sm">
             {/* Header */}
             <div className="grid grid-cols-3 border-b border-[#E4E7F0] bg-[#F7F8FC]">
               <div className="p-4 text-sm font-medium text-slate-400">Recurso</div>
@@ -172,6 +173,7 @@ export function Solution() {
               </div>
             ))}
           </div>
+          </div>
         </motion.div>
 
         {/* Value statement */}
@@ -182,9 +184,9 @@ export function Solution() {
           transition={{ duration: 0.6 }}
           className="mt-16 text-center max-w-3xl mx-auto"
         >
-          <div className="rounded-2xl border-l-4 border-[#FFCC00] bg-[#111948] p-8 shadow-xl shadow-[#111948]/15">
+          <div className="rounded-2xl border-l-4 border-[#FFCC00] bg-[#111948] p-5 sm:p-8 shadow-xl shadow-[#111948]/15">
             <Zap className="h-8 w-8 text-[#FFCC00] mx-auto mb-4" />
-            <p className="text-xl font-medium text-white leading-relaxed">
+            <p className="text-base sm:text-xl font-medium text-white leading-relaxed">
               "A Fidele não é uma despesa. É um investimento que reduz custo
               operacional do RH, aumenta retenção de talentos e melhora o
               clima organizacional."
