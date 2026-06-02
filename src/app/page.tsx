@@ -21,6 +21,14 @@ export default function HomePage() {
         <Benefits />
         <SocialProof />
         <Process />
+        {/*
+          TODO — SEÇÃO FAQ (não existe na estrutura atual)
+          Inserir aqui um novo componente <Faq /> com as seguintes objeções:
+          1. "Trocar de plano é muito complicado." → A Fidele cuida de todo o processo. Você só decide.
+          2. "Tenho medo de perder a cobertura que tenho hoje." → O diagnóstico mostra o que você tem hoje e o que cada alternativa oferece. Você só migra se a nova opção for igual ou melhor.
+          3. "Já tenho um corretor de confiança." → A análise é gratuita e não gera compromisso. Se o plano atual for o melhor — a gente fala isso também.
+          4. "O diagnóstico é realmente gratuito?" → Sim. Sem custo, sem taxa e sem compromisso de contratação.
+        */}
         <LeadForm />
       </main>
       <Footer />

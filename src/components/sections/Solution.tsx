@@ -17,43 +17,43 @@ import {
 const differentials = [
   {
     icon: HeartHandshake,
-    title: "Consultoria Estratégica",
+    title: "Diagnóstico gratuito do seu plano",
     description:
-      "Não vendemos plano. Fazemos diagnóstico completo da sua realidade e encontramos a solução ideal para o perfil da sua empresa.",
-    features: ["Análise do plano atual", "Mapeamento de dores", "Proposta personalizada"],
+      "Analisamos o seu contrato atual, a cobertura real, os valores e as regras que a operadora não deixa clara. Você entende de verdade o que tem.",
+    features: ["Análise do contrato vigente", "Cobertura real vs. prometida", "Histórico de reajustes"],
   },
   {
     icon: Headphones,
-    title: "Suporte Humanizado ao RH",
+    title: "Comparativo entre operadoras",
     description:
-      "Seu RH terá um canal direto com consultores dedicados para resolver qualquer demanda operacional com agilidade real.",
-    features: ["Canal exclusivo", "Resposta em até 2h úteis", "Relatórios mensais"],
+      "Verificamos o que cada operadora oferece para o perfil da sua família — rede, hospitais, valores e condições. Tudo lado a lado, sem enrolação.",
+    features: ["Amil, SulAmérica, Bradesco e mais", "Redes Einstein, Sírio e Fleury", "Análise por faixa etária e perfil"],
   },
   {
     icon: BarChart3,
-    title: "Gestão Operacional Ativa",
+    title: "Transparência total — sem surpresas",
     description:
-      "Cuidamos de toda a operação: autorizações, reembolsos, implantação, exclusões e inclusões para que seu RH foque no que importa.",
-    features: ["Gestão de glosas", "Controle de utilização", "Benchmarks do mercado"],
+      "Mostramos os valores reais, as regras de carência, as restrições e o que cada plano cobre de verdade. Sem letra miúda escondida.",
+    features: ["Valores e reajustes projetados", "Regras de carência detalhadas", "Cobertura comparada"],
   },
   {
     icon: UserCheck,
-    title: "Pós-venda que existe",
+    title: "Acompanhamento pós-venda real",
     description:
-      "Acompanhamento ativo ao longo de todo o contrato. Reviews periódicos, renegociações proativas e assessoria permanente.",
-    features: ["Reviews trimestrais", "Renegociação proativa", "Assessoria permanente"],
+      "Se você migrar de plano com a Fidele, teremos um canal direto para resolver qualquer problema. A gente não some depois da assinatura.",
+    features: ["Canal direto com o seu consultor", "Suporte em autorizações e reembolsos", "Revisão periódica do plano"],
   },
 ];
 
 const comparison = [
-  { item: "Consultor dedicado", fidele: true, common: false },
-  { item: "Suporte ao RH incluído", fidele: true, common: false },
-  { item: "Gestão de autorizações", fidele: true, common: false },
-  { item: "Reviews periódicos", fidele: true, common: false },
+  { item: "Diagnóstico gratuito do plano", fidele: true, common: false },
+  { item: "Comparativo entre operadoras", fidele: true, common: false },
+  { item: "Análise da cobertura real", fidele: true, common: false },
+  { item: "Transparência sobre restrições", fidele: true, common: false },
   { item: "Acesso a múltiplas operadoras", fidele: true, common: true },
-  { item: "Pós-venda ativo", fidele: true, common: false },
-  { item: "Relatórios de utilização", fidele: true, common: false },
-  { item: "Renegociação proativa", fidele: true, common: false },
+  { item: "Suporte pós-venda ativo", fidele: true, common: false },
+  { item: "Projeção de reajustes futuros", fidele: true, common: false },
+  { item: "Sem compromisso de contratação", fidele: true, common: false },
 ];
 
 export function Solution() {
@@ -70,19 +70,18 @@ export function Solution() {
         >
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#111948]/15 bg-[#111948]/6 px-4 py-1.5 text-sm text-[#111948] font-medium">
             <Sparkles className="h-3.5 w-3.5 text-[#FFCC00]" />
-            A solução Fidele
+            O que a Fidele entrega
           </div>
           <h2 className="text-3xl font-bold text-[#111948] md:text-4xl lg:text-5xl">
-            Sua parceira estratégica{" "}
+            Somos especialistas{" "}
             <span className="relative inline-block">
-              em benefícios corporativos.
-              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#FFCC00]" />
+              do seu lado.
             </span>
           </h2>
           <p className="mt-6 text-lg text-slate-500 max-w-2xl mx-auto">
-            Não somos uma corretora comum. Somos uma consultoria especializada
-            que combina atendimento humanizado e expertise de mercado
-            para transformar o benefício de saúde da sua empresa.
+            Enquanto a maioria das corretoras só quer fechar a venda, a Fidele
+            analisa o que você realmente precisa — e mostra onde seu dinheiro
+            pode ir mais longe.
           </p>
         </motion.div>
 
@@ -187,13 +186,13 @@ export function Solution() {
           <div className="rounded-2xl border-l-4 border-[#FFCC00] bg-[#111948] p-5 sm:p-8 shadow-xl shadow-[#111948]/15">
             <Zap className="h-8 w-8 text-[#FFCC00] mx-auto mb-4" />
             <p className="text-base sm:text-xl font-medium text-white leading-relaxed">
-              "A Fidele não é uma despesa. É um investimento que reduz custo
-              operacional do RH, aumenta retenção de talentos e melhora o
-              clima organizacional."
+              "A Fidele só recomenda migrar se a alternativa for igual ou melhor
+              ao que você tem hoje. Se o seu plano atual for o melhor —
+              a gente fala isso também."
             </p>
             <div className="mt-4 flex items-center justify-center gap-2 text-sm text-white/60">
               <span className="h-1.5 w-1.5 rounded-full bg-[#21A621]" />
-              <span>Resultado real de empresas que migraram para a Fidele</span>
+              <span>Princípio que guia cada diagnóstico da Fidele</span>
             </div>
           </div>
         </motion.div>

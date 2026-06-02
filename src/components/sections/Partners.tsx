@@ -36,8 +36,8 @@ export function Partners() {
             <span className="text-slate-400">e redes do Brasil.</span>
           </h2>
           <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
-            Somos independentes — analisamos o mercado inteiro e indicamos a
-            operadora mais adequada ao perfil e orçamento da sua empresa.
+            Somos independentes — analisamos todas as opções e indicamos o que
+            realmente faz sentido para o perfil e o orçamento da sua família.
           </p>
         </motion.div>
 

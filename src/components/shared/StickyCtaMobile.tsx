@@ -36,7 +36,7 @@ export function StickyCtaMobile() {
               onClick={scrollToForm}
             >
               <MessageCircle className="h-5 w-5" />
-              Solicitar consultoria gratuita
+              Quero meu diagnóstico gratuito
             </Button>
           </div>
         </motion.div>

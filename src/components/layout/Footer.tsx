@@ -20,7 +20,7 @@ export function Footer() {
               />
             </div>
             <p className="text-sm text-white/60 leading-relaxed max-w-xs">
-              Consultoria estratégica em benefícios corporativos. Há mais de 15 anos sendo o parceiro de saúde de empresas que valorizam seus talentos.
+              Especialistas em planos de saúde para famílias. Há mais de 15 anos ajudando pessoas a entenderem o que pagam e encontrarem o plano certo.
             </p>
             <div className="flex items-center gap-3 mt-6">
               <a
@@ -93,7 +93,7 @@ export function Footer() {
           <div className="flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-[#21A621]" />
             <p className="text-xs text-white/30">
-              Desenvolvido com excelência para o mercado corporativo.
+              Desenvolvido com dedicação para famílias que merecem clareza na saúde.
             </p>
           </div>
         </div>

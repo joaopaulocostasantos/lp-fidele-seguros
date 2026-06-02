@@ -35,21 +35,19 @@ import {
 const schema = z.object({
   name: z.string().min(3, "Informe seu nome completo"),
   email: z.string().email("E-mail inválido"),
-  phone: z.string().min(14, "Telefone inválido"),
-  hasCnpj: z.string().min(1, "Selecione uma opção"),
-  companySize: z.string().min(1, "Selecione o número de vidas"),
-  cnpjType: z.string().min(1, "Selecione o tipo de CNPJ"),
-  currentOperator: z.string().min(1, "Selecione sua operadora atual"),
-  mainPain: z.string().min(1, "Selecione sua principal dor"),
+  hasPlan: z.string().min(1, "Selecione uma opção"),
+  planTime: z.string().min(1, "Selecione uma opção"),
+  planPeople: z.string().min(1, "Selecione uma opção"),
+  phone: z.string().min(14, "WhatsApp inválido"),
 });
 
 type FormData = z.infer<typeof schema>;
 
 const trustItems = [
-  "Análise gratuita e sem compromisso",
+  "Diagnóstico gratuito e sem compromisso",
   "Retorno em até 24h úteis",
   "Seus dados 100% protegidos (LGPD)",
-  "+300 empresas já atendidas",
+  "+300 famílias já atendidas",
 ];
 
 export function LeadForm() {
@@ -89,8 +87,9 @@ export function LeadForm() {
       await sendLeadToWebhook(payload);
 
       const isQualified =
-        data.hasCnpj === "sim" &&
-        !["menos-5", "nao-sei"].includes(data.companySize);
+        data.hasPlan === "sim" &&
+        ["3-5", "mais-5"].includes(data.planTime) &&
+        !["1", "2"].includes(data.planPeople);
 
       trackLead({ value: isQualified ? "qualified" : "standard" });
       if (isQualified) trackQualifiedLead(payload as unknown as Record<string, unknown>);
@@ -126,11 +125,11 @@ export function LeadForm() {
               Consultoria gratuita
             </div>
             <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
-              Fale com um especialista{" "}
-              <span className="text-[#FFCC00]">da Fidele.</span>
+              Quanto você está deixando{" "}
+              <span className="text-[#FFCC00]">na mesa todo mês?</span>
             </h2>
             <p className="mt-4 text-lg text-white/60 max-w-xl mx-auto">
-              Preencha o formulário e receba uma análise gratuita do seu plano atual com recomendações personalizadas.
+              Famílias com 3 a 5 pessoas que revisaram o plano com a Fidele descobriram alternativas com a mesma rede por menos. O diagnóstico leva menos de 15 minutos.
             </p>
           </motion.div>
 
@@ -154,164 +153,103 @@ export function LeadForm() {
                   <Label htmlFor="name">Nome completo *</Label>
                   <Input
                     id="name"
-                    placeholder="Ex: João Silva"
+                    placeholder="Nome completo"
                     error={errors.name?.message}
                     {...register("name")}
                   />
                 </div>
 
-                {/* Email + Phone */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="email">E-mail corporativo *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="Ex: joao@empresa.com"
-                      error={errors.email?.message}
-                      {...register("email")}
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label htmlFor="phone">WhatsApp *</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="(11) 9 9999-9999"
-                      error={errors.phone?.message}
-                      {...register("phone")}
-                      onChange={(e) => {
-                        const formatted = formatPhone(e.target.value);
-                        setValue("phone", formatted, { shouldValidate: !!watch("phone") });
-                      }}
-                    />
-                  </div>
+                {/* Email */}
+                <div className="space-y-1.5">
+                  <Label htmlFor="email">E-mail *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="E-mail"
+                    error={errors.email?.message}
+                    {...register("email")}
+                  />
                 </div>
 
-                {/* Has CNPJ */}
+                {/* Has plan */}
                 <div className="space-y-1.5">
-                  <Label>Sua empresa possui CNPJ ativo? *</Label>
+                  <Label>Possui plano de saúde atualmente? *</Label>
                   <Controller
-                    name="hasCnpj"
+                    name="hasPlan"
                     control={control}
                     render={({ field }) => (
                       <Select onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger error={errors.hasCnpj?.message}>
-                          <SelectValue placeholder="Selecione uma opção" />
+                        <SelectTrigger error={errors.hasPlan?.message}>
+                          <SelectValue placeholder="Possui plano de saúde atualmente?" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="sim">Sim, possuo CNPJ ativo</SelectItem>
-                          <SelectItem value="nao">Não, ainda não tenho</SelectItem>
-                          <SelectItem value="em-abertura">Estou em processo de abertura</SelectItem>
+                          <SelectItem value="sim">Sim</SelectItem>
+                          <SelectItem value="nao">Não</SelectItem>
                         </SelectContent>
                       </Select>
                     )}
                   />
                 </div>
 
-                {/* Company size + CNPJ type */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <Label>Quantas vidas na empresa? *</Label>
-                    <Controller
-                      name="companySize"
-                      control={control}
-                      render={({ field }) => (
-                        <Select onValueChange={field.onChange} value={field.value}>
-                          <SelectTrigger error={errors.companySize?.message}>
-                            <SelectValue placeholder="Selecione" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="menos-5">Menos de 5 vidas</SelectItem>
-                            <SelectItem value="5-10">5 a 10 vidas</SelectItem>
-                            <SelectItem value="11-30">11 a 30 vidas</SelectItem>
-                            <SelectItem value="31-50">31 a 50 vidas</SelectItem>
-                            <SelectItem value="51-100">51 a 100 vidas</SelectItem>
-                            <SelectItem value="mais-100">Mais de 100 vidas</SelectItem>
-                            <SelectItem value="nao-sei">Não sei ao certo</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      )}
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <Label>Tipo do CNPJ *</Label>
-                    <Controller
-                      name="cnpjType"
-                      control={control}
-                      render={({ field }) => (
-                        <Select onValueChange={field.onChange} value={field.value}>
-                          <SelectTrigger error={errors.cnpjType?.message}>
-                            <SelectValue placeholder="Selecione" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="ltda">LTDA / SRL</SelectItem>
-                            <SelectItem value="sa">S/A</SelectItem>
-                            <SelectItem value="mei">MEI</SelectItem>
-                            <SelectItem value="eireli">EIRELI</SelectItem>
-                            <SelectItem value="slu">SLU</SelectItem>
-                            <SelectItem value="outro">Outro</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      )}
-                    />
-                  </div>
-                </div>
-
-                {/* Current operator */}
+                {/* Plan time */}
                 <div className="space-y-1.5">
-                  <Label>Operadora atual *</Label>
+                  <Label>Há quanto tempo possui o plano? *</Label>
                   <Controller
-                    name="currentOperator"
+                    name="planTime"
                     control={control}
                     render={({ field }) => (
                       <Select onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger error={errors.currentOperator?.message}>
-                          <SelectValue placeholder="Selecione sua operadora" />
+                        <SelectTrigger error={errors.planTime?.message}>
+                          <SelectValue placeholder="Há quanto tempo possui o plano?" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="amil">Amil</SelectItem>
-                          <SelectItem value="sulamerica">SulAmérica</SelectItem>
-                          <SelectItem value="bradesco">Bradesco Saúde</SelectItem>
-                          <SelectItem value="omint">Omint</SelectItem>
-                          <SelectItem value="notredame">NotreDame Intermédica</SelectItem>
-                          <SelectItem value="porto">Porto Saúde</SelectItem>
-                          <SelectItem value="unimed">Unimed</SelectItem>
-                          <SelectItem value="hapvida">Hapvida</SelectItem>
-                          <SelectItem value="outro">Outra operadora</SelectItem>
-                          <SelectItem value="nenhuma">Não possuo plano atualmente</SelectItem>
+                          <SelectItem value="menos-1">Menos de 1 ano</SelectItem>
+                          <SelectItem value="1-2">1 a 2 anos</SelectItem>
+                          <SelectItem value="3-5">3 a 5 anos</SelectItem>
+                          <SelectItem value="mais-5">Mais de 5 anos</SelectItem>
                         </SelectContent>
                       </Select>
                     )}
                   />
                 </div>
 
-                {/* Main pain */}
+                {/* Plan people */}
                 <div className="space-y-1.5">
-                  <Label>Principal dor com o plano atual *</Label>
+                  <Label>Quantas pessoas estão no plano? *</Label>
                   <Controller
-                    name="mainPain"
+                    name="planPeople"
                     control={control}
                     render={({ field }) => (
                       <Select onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger error={errors.mainPain?.message}>
-                          <SelectValue placeholder="Selecione sua maior dificuldade" />
+                        <SelectTrigger error={errors.planPeople?.message}>
+                          <SelectValue placeholder="Quantas pessoas estão no plano?" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="custo-alto">Custo muito alto</SelectItem>
-                          <SelectItem value="atendimento-ruim">Atendimento ruim da operadora</SelectItem>
-                          <SelectItem value="suporte-corretor">Falta de suporte do corretor</SelectItem>
-                          <SelectItem value="rede-limitada">Rede hospitalar limitada</SelectItem>
-                          <SelectItem value="rh-sobrecarregado">RH sobrecarregado</SelectItem>
-                          <SelectItem value="colaboradores-insatisfeitos">Colaboradores insatisfeitos</SelectItem>
-                          <SelectItem value="reajuste-alto">Reajuste acima do esperado</SelectItem>
-                          <SelectItem value="burocratico">Processo muito burocrático</SelectItem>
-                          <SelectItem value="sem-plano">Preciso contratar um plano</SelectItem>
-                          <SelectItem value="outro">Outro motivo</SelectItem>
+                          <SelectItem value="1">1 pessoa</SelectItem>
+                          <SelectItem value="2">2 pessoas</SelectItem>
+                          <SelectItem value="3">3 pessoas</SelectItem>
+                          <SelectItem value="4">4 pessoas</SelectItem>
+                          <SelectItem value="5">5 pessoas</SelectItem>
+                          <SelectItem value="6+">6 ou mais pessoas</SelectItem>
                         </SelectContent>
                       </Select>
                     )}
+                  />
+                </div>
+
+                {/* Phone */}
+                <div className="space-y-1.5">
+                  <Label htmlFor="phone">WhatsApp *</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="WhatsApp com DDD"
+                    error={errors.phone?.message}
+                    {...register("phone")}
+                    onChange={(e) => {
+                      const formatted = formatPhone(e.target.value);
+                      setValue("phone", formatted, { shouldValidate: !!watch("phone") });
+                    }}
                   />
                 </div>
 
@@ -340,7 +278,7 @@ export function LeadForm() {
                   ) : (
                     <>
                       <MessageCircle className="h-5 w-5" />
-                      Solicitar consultoria gratuita
+                      Quero meu diagnóstico gratuito
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </>
                   )}
@@ -381,9 +319,9 @@ export function LeadForm() {
                 <ol className="space-y-3">
                   {[
                     "Recebemos seu formulário",
-                    "Consultor entra em contato em até 24h",
+                    "Especialista entra em contato em até 24h",
                     "Diagnóstico gratuito do seu plano",
-                    "Apresentamos as melhores alternativas",
+                    "Comparamos com alternativas da mesma rede",
                   ].map((step, i) => (
                     <li key={step} className="flex items-start gap-3">
                       <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFCC00] text-[11px] font-bold text-[#111948]">

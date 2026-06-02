@@ -16,88 +16,88 @@ import {
 const benefits = [
   {
     icon: Trophy,
-    title: "Retenção de talentos",
+    title: "Economia real no bolso",
     description:
-      "Empresas com benefícios de saúde premium retêm até 3x mais talentos do que a concorrência.",
-    metric: "3x",
-    metricLabel: "mais retenção",
+      "Famílias que revisaram o plano com a Fidele encontraram alternativas com a mesma rede por um valor menor.",
+    metric: "R$+",
+    metricLabel: "de diferença possível",
     iconBg: "bg-amber-50",
     iconColor: "text-amber-500",
     metricColor: "text-amber-500",
   },
   {
     icon: TrendingDown,
-    title: "Redução de turnover",
+    title: "Rede premium garantida",
     description:
-      "Benefícios estratégicos reduzem drasticamente o custo de rotatividade e substituição de colaboradores.",
-    metric: "40%",
-    metricLabel: "menos turnover",
+      "Einstein, Sírio-Libanês e Fleury na cobertura. A gente verifica antes — você não descobre depois.",
+    metric: "3",
+    metricLabel: "redes de referência",
     iconBg: "bg-[#21A621]/10",
     iconColor: "text-[#21A621]",
     metricColor: "text-[#21A621]",
   },
   {
     icon: Heart,
-    title: "Saúde preventiva",
+    title: "Cobertura real, sem surpresa",
     description:
-      "Colaboradores com plano premium buscam cuidados preventivos, reduzindo absenteísmo e afastamentos.",
-    metric: "65%",
-    metricLabel: "menos ausências",
+      "Você sabe exatamente o que cobre, o que não cobre e quais são as carências — antes de assinar qualquer contrato.",
+    metric: "100%",
+    metricLabel: "transparência",
     iconBg: "bg-pink-50",
     iconColor: "text-pink-500",
     metricColor: "text-pink-500",
   },
   {
     icon: Star,
-    title: "Marca empregadora forte",
+    title: "Atendimento que resolve",
     description:
-      "Employer branding poderoso atrai candidatos melhores e posiciona sua empresa como destino de carreira.",
-    metric: "#1",
-    metricLabel: "diferencial citado",
+      "Tem um problema com o plano? Tem um consultor da Fidele para resolver — sem fila, sem enrolação.",
+    metric: "24h",
+    metricLabel: "tempo de resposta",
     iconBg: "bg-[#111948]/8",
     iconColor: "text-[#111948]",
     metricColor: "text-[#111948]",
   },
   {
     icon: Briefcase,
-    title: "Suporte operacional ao RH",
+    title: "Diagnóstico em 15 minutos",
     description:
-      "Seu RH deixa de ser o 'help desk' do plano de saúde e volta a focar em estratégia e cultura.",
-    metric: "20h",
-    metricLabel: "salvas por mês",
+      "Uma conversa com o nosso especialista já é suficiente para entender se você está no plano certo.",
+    metric: "15",
+    metricLabel: "minutos",
     iconBg: "bg-indigo-50",
     iconColor: "text-indigo-500",
     metricColor: "text-indigo-500",
   },
   {
     icon: Clock,
-    title: "Agilidade nos processos",
+    title: "Zero burocracia",
     description:
-      "Autorizações, reembolsos e inclusões resolvidas em tempo recorde com nossa equipe dedicada.",
-    metric: "2h",
-    metricLabel: "tempo de resposta",
+      "A Fidele cuida de toda a transição. Da análise à migração, você só decide — o resto é com a gente.",
+    metric: "0",
+    metricLabel: "papelada pra você",
     iconBg: "bg-cyan-50",
     iconColor: "text-cyan-500",
     metricColor: "text-cyan-500",
   },
   {
     icon: ShieldCheck,
-    title: "Segurança jurídica",
+    title: "Segurança na escolha",
     description:
-      "Conformidade total com ANS, LGPD e legislação trabalhista. Sua empresa protegida em todas as frentes.",
+      "Você só muda se quiser. Se o plano atual for o melhor — a gente fala isso também. Sem compromisso.",
     metric: "100%",
-    metricLabel: "compliance",
+    metricLabel: "sem pressão",
     iconBg: "bg-[#21A621]/10",
     iconColor: "text-[#21A621]",
     metricColor: "text-[#21A621]",
   },
   {
     icon: Smile,
-    title: "Clima organizacional",
+    title: "Plano certo para a família",
     description:
-      "Colaboradores satisfeitos com seus benefícios têm índices de engajamento e produtividade mais altos.",
-    metric: "87%",
-    metricLabel: "mais engajamento",
+      "Analisamos o perfil completo da sua família para indicar o plano que realmente atende — não o mais caro.",
+    metric: "3–5",
+    metricLabel: "pessoas",
     iconBg: "bg-orange-50",
     iconColor: "text-orange-500",
     metricColor: "text-orange-500",
@@ -105,10 +105,10 @@ const benefits = [
 ];
 
 const impactMetrics = [
-  { value: 40, suffix: "%", label: "Redução média de turnover" },
-  { value: 20, suffix: "h", label: "Horas de RH liberadas/mês" },
-  { value: 98, suffix: "%", label: "Satisfação dos colaboradores" },
-  { value: 2, suffix: "h", label: "Resposta média do suporte" },
+  { value: 15, suffix: "+", label: "Anos de mercado" },
+  { value: 6, suffix: "+", label: "Operadoras analisadas" },
+  { value: 98, suffix: "%", label: "Clientes satisfeitos" },
+  { value: 15, suffix: " min", label: "Tempo do diagnóstico" },
 ];
 
 export function Benefits() {
@@ -125,18 +125,17 @@ export function Benefits() {
         >
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#21A621]/20 bg-[#21A621]/8 px-4 py-1.5 text-sm text-[#21A621] font-medium">
             <TrendingDown className="h-3.5 w-3.5" />
-            Impacto no seu negócio
+            O que você ganha com o diagnóstico
           </div>
           <h2 className="text-3xl font-bold text-[#111948] md:text-4xl lg:text-5xl">
-            Saúde premium que{" "}
+            Clareza sobre o que você tem{" "}
             <span className="relative inline-block text-[#21A621]">
-              gera resultado real.
-              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#FFCC00]" />
+              — e o que poderia ter.
             </span>
           </h2>
           <p className="mt-6 text-lg text-slate-500 max-w-2xl mx-auto">
-            Investir em saúde corporativa premium não é custo — é estratégia de
-            negócio. Veja o impacto concreto nas empresas que escolheram a Fidele.
+            A maioria das pessoas nunca revisou o plano de saúde. Quem revisa com
+            a Fidele entende onde estava perdendo dinheiro e encontra alternativas melhores.
           </p>
         </motion.div>
 

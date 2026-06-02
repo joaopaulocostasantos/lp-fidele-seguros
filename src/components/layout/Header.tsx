@@ -72,7 +72,7 @@ export function Header() {
             size="sm"
             onClick={() => scrollTo("formulario")}
           >
-            Consultoria gratuita
+            Diagnóstico gratuito
           </Button>
         </div>
 
@@ -113,7 +113,7 @@ export function Header() {
             className="w-full mt-2"
             onClick={() => scrollTo("formulario")}
           >
-            Consultoria gratuita
+            Diagnóstico gratuito
           </Button>
         </motion.div>
       )}

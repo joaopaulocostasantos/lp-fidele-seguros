@@ -20,32 +20,32 @@ const nextSteps = [
   {
     icon: Clock,
     title: "Aguarde o contato",
-    description: "Um consultor especializado da Fidele entrará em contato em até 24 horas úteis pelo WhatsApp ou telefone.",
+    description: "Um especialista da Fidele entrará em contato em até 24 horas úteis pelo WhatsApp ou telefone.",
     time: "Até 24h úteis",
     iconBg: "bg-[#111948]/8",
     iconColor: "text-[#111948]",
   },
   {
     icon: FileText,
-    title: "Diagnóstico gratuito",
-    description: "Seu consultor irá analisar sua situação atual e preparar um diagnóstico completo e personalizado.",
+    title: "Diagnóstico do seu plano",
+    description: "Vamos analisar o seu plano atual — cobertura, rede credenciada e valores — e verificar se está adequado para a sua família.",
     time: "1-2 dias úteis",
     iconBg: "bg-[#FFCC00]/15",
     iconColor: "text-[#111948]",
   },
   {
     icon: HeartHandshake,
-    title: "Proposta estratégica",
-    description: "Apresentaremos as melhores alternativas de mercado com análise de custo-benefício e comparativos claros.",
+    title: "Comparativo com alternativas",
+    description: "Se encontrarmos opções melhores, apresentamos os comparativos com valores, redes e condições. Sem pressão para trocar.",
     time: "2-3 dias úteis",
     iconBg: "bg-[#21A621]/10",
     iconColor: "text-[#21A621]",
   },
   {
     icon: Calendar,
-    title: "Reunião de alinhamento",
-    description: "Marcamos uma reunião (online ou presencial) para apresentar as propostas e tirar todas as suas dúvidas.",
-    time: "Conforme agenda",
+    title: "Você decide",
+    description: "Só você decide se quer migrar ou não. Se ficar no plano atual for a melhor opção — a gente fala isso claramente.",
+    time: "No seu tempo",
     iconBg: "bg-[#111948]/8",
     iconColor: "text-[#111948]",
   },
@@ -107,8 +107,8 @@ export function ThankYouContent() {
               </span>
             </h1>
             <p className="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
-              Um consultor especializado da Fidele vai entrar em contato em até
-              24 horas úteis para iniciar o diagnóstico gratuito do seu plano.
+              Um especialista da Fidele vai entrar em contato em até 24 horas
+              úteis para iniciar o diagnóstico gratuito do seu plano.
             </p>
           </motion.div>
 
@@ -159,7 +159,7 @@ export function ThankYouContent() {
               Você está em boas mãos.
             </p>
             <p className="text-sm text-white/60">
-              Mais de 300 empresas em São Paulo já confiam na Fidele para gerir seus benefícios de saúde.
+              Mais de 300 famílias já confiaram na Fidele para revisar e melhorar seus planos de saúde.
             </p>
           </motion.div>
 
@@ -173,7 +173,7 @@ export function ThankYouContent() {
             <Link href="/#formulario">
               <Button variant="premium" size="lg" className="w-full sm:w-auto">
                 <MessageCircle className="h-5 w-5" />
-                Solicitar outra consultoria
+                Solicitar outro diagnóstico
               </Button>
             </Link>
           </motion.div>

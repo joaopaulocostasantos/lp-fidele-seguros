@@ -15,42 +15,42 @@ const steps = [
   {
     number: "01",
     icon: Search,
-    title: "Diagnóstico do plano atual",
+    title: "Você preenche o formulário",
     description:
-      "Análise completa do contrato vigente, cobertura, valores, histórico de reajustes e principais dores do seu RH e dos colaboradores.",
-    duration: "1-2 dias úteis",
+      "Nos conta o básico: família, plano atual, operadora e o que mais te incomoda. Leva menos de 3 minutos.",
+    duration: "3 minutos",
   },
   {
     number: "02",
     icon: Map,
-    title: "Mapeamento das dores",
+    title: "Nosso especialista entra em contato",
     description:
-      "Identificamos os principais gargalos: atendimento, rede, processos internos, custos ocultos e oportunidades de melhoria.",
-    duration: "1 dia útil",
+      "Em até 24h úteis, um especialista da Fidele fala com você para entender melhor a sua situação.",
+    duration: "Até 24h úteis",
   },
   {
     number: "03",
     icon: BarChart2,
-    title: "Comparativo estratégico",
+    title: "Análise do seu plano atual",
     description:
-      "Apresentamos um relatório com as melhores alternativas do mercado, comparando cobertura, rede, preço e qualidade de atendimento.",
-    duration: "2-3 dias úteis",
+      "Verificamos cobertura, rede credenciada, histórico de reajustes e o que o seu plano realmente entrega versus o que cobra.",
+    duration: "1-2 dias",
   },
   {
     number: "04",
     icon: Rocket,
-    title: "Implantação sem dor de cabeça",
+    title: "Comparativo com alternativas",
     description:
-      "Cuidamos de toda a transição: cadastramento, inclusão de dependentes, carências negociadas e comunicação com colaboradores.",
-    duration: "15-30 dias",
+      "Apresentamos as melhores opções do mercado para o perfil da sua família — com valores, redes e condições lado a lado.",
+    duration: "2-3 dias",
   },
   {
     number: "05",
     icon: HeartHandshake,
-    title: "Suporte contínuo e pós-venda",
+    title: "Você decide. A gente cuida do resto.",
     description:
-      "Canal dedicado, reviews trimestrais, gestão de demandas do RH e renegociações proativas. Seu parceiro para sempre.",
-    duration: "Permanente",
+      "Se quiser migrar, cuidamos de todo o processo. Se preferir ficar no plano atual — tudo bem também. Sem pressão.",
+    duration: "No seu tempo",
   },
 ];
 
@@ -71,12 +71,12 @@ export function Process() {
             Como funciona
           </div>
           <h2 className="text-3xl font-bold text-[#111948] md:text-4xl lg:text-5xl">
-            Processo consultivo{" "}
-            <span className="text-[#21A621]">em 5 etapas.</span>
+            Diagnóstico em 5 etapas.{" "}
+            <span className="text-[#21A621]">Tudo gratuito.</span>
           </h2>
           <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
-            Da primeira conversa ao suporte permanente. Um processo transparente,
-            ágil e focado no resultado da sua empresa.
+            Do primeiro contato ao diagnóstico completo. Em menos de uma semana
+            você sabe se está no plano certo.
           </p>
         </motion.div>
 
@@ -132,11 +132,11 @@ export function Process() {
             className="group"
             onClick={() => document.getElementById("formulario")?.scrollIntoView({ behavior: "smooth" })}
           >
-            Iniciar meu diagnóstico gratuito
+            Quero meu diagnóstico gratuito
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
           <p className="mt-3 text-sm text-slate-400">
-            Sem compromisso. Análise gratuita em até 48h.
+            Gratuito, sem compromisso. Em menos de uma semana você sabe.
           </p>
         </motion.div>
       </div>

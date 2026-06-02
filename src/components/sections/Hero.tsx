@@ -29,16 +29,16 @@ const operators = [
 
 const stats = [
   { value: 15, suffix: "+", label: "Anos de mercado", icon: TrendingUp },
-  { value: 300, suffix: "+", label: "Empresas atendidas", icon: Users },
+  { value: 300, suffix: "+", label: "Famílias atendidas", icon: Users },
   { value: 98, suffix: "%", label: "Satisfação", icon: Star },
   { value: 5000, suffix: "+", label: "Vidas protegidas", icon: Shield },
 ];
 
 const benefits = [
-  "Diagnóstico gratuito do plano atual",
-  "Acesso a todas as grandes operadoras",
-  "Suporte humanizado pós-venda",
-  "Sem custo de consultoria",
+  "Diagnóstico gratuito e sem compromisso",
+  "Comparativo entre as principais operadoras",
+  "Redes Einstein, Sírio-Libanês e Fleury",
+  "Acompanhamento pós-venda real",
 ];
 
 const fadeUp: Variants = {
@@ -117,7 +117,7 @@ export function Hero() {
               className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-[#111948]/15 bg-[#111948]/6 px-4 py-1.5 text-sm text-[#111948] font-medium"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-[#21A621] animate-pulse" />
-              Consultoria estratégica em saúde corporativa
+              Diagnóstico gratuito em saúde para famílias
             </motion.div>
 
             {/* Headline */}
@@ -128,12 +128,11 @@ export function Hero() {
               variants={fadeUp}
               className="text-4xl font-bold leading-[1.1] tracking-tight text-[#111948] md:text-5xl lg:text-5xl xl:text-6xl"
             >
-              Transforme o plano de saúde{" "}
+              Tem plano de saúde{" "}
               <span className="relative inline-block">
-                da sua empresa
-                <span className="absolute -bottom-1.5 left-0 right-0 h-1 rounded-full bg-[#FFCC00]" />
+                há mais de 3 anos?
               </span>{" "}
-              em um diferencial competitivo.
+              Você provavelmente está pagando mais do que deveria.
             </motion.h1>
 
             {/* Subheadline */}
@@ -144,9 +143,9 @@ export function Hero() {
               variants={fadeUp}
               className="mt-6 text-lg text-slate-500 leading-relaxed"
             >
-              A Fidele ajuda empresas exigentes a oferecerem saúde premium com
-              suporte humanizado, redução da sobrecarga do RH e atendimento
-              consultivo de verdade — do diagnóstico ao pós-venda.
+              A Fidele analisa o seu plano atual, compara operadoras e mostra
+              exatamente onde você está perdendo dinheiro — sem compromisso
+              e sem custo.
             </motion.p>
 
             {/* Benefits list */}
@@ -179,7 +178,7 @@ export function Hero() {
                 onClick={scrollToForm}
                 className="group"
               >
-                Solicitar consultoria gratuita
+                Quero meu diagnóstico gratuito
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button
@@ -187,7 +186,7 @@ export function Hero() {
                 size="xl"
                 onClick={scrollToForm}
               >
-                Comparar meu plano atual
+                Analisar meu plano agora
               </Button>
             </motion.div>
 
@@ -209,7 +208,7 @@ export function Hero() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-[#111948]">Diagnóstico gratuito</p>
-                  <p className="text-xs text-slate-400">Análise completa do seu plano atual</p>
+                  <p className="text-xs text-slate-400">Análise completa do seu plano de família</p>
                 </div>
               </div>
 

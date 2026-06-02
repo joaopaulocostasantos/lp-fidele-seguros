@@ -1,12 +1,10 @@
 export interface LeadFormData {
   name: string;
   email: string;
+  hasPlan: string;
+  planTime: string;
+  planPeople: string;
   phone: string;
-  hasCnpj: string;
-  companySize: string;
-  cnpjType: string;
-  currentOperator: string;
-  mainPain: string;
 }
 
 export interface UtmParams {

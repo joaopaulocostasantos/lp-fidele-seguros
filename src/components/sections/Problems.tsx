@@ -16,72 +16,72 @@ import {
 const problems = [
   {
     icon: Clock,
-    title: "RH sobrecarregado",
+    title: "Reajuste anual sem aviso claro",
     description:
-      "Sua equipe de RH perde horas gerenciando reembolsos, autorizações e reclamações que deveriam ser resolvidas pela operadora.",
+      "Chega o início do ano e a parcela sobe. Sem explicação detalhada, sem negociação. Você paga ou cancela — essa é a escolha que te dão.",
     iconBg: "bg-amber-50",
     iconColor: "text-amber-500",
     accent: "border-l-amber-400",
   },
   {
     icon: PhoneOff,
-    title: "Atendimento que some",
+    title: "Corretor que some depois da venda",
     description:
-      "Corretores que somem após a venda. Fila de espera infinita. Zero suporte quando você mais precisa.",
+      "Na hora de contratar, estava lá. Agora, para resolver um problema, você não consegue nem resposta.",
     iconBg: "bg-red-50",
     iconColor: "text-red-500",
     accent: "border-l-red-400",
   },
   {
     icon: Network,
-    title: "Rede hospitalar limitada",
+    title: "Rede credenciada que muda sem avisar",
     description:
-      "Hospitais de referência fora da cobertura. Colaboradores precisam recorrer a planos particulares ou desembolso direto.",
+      "O hospital que você conhecia saiu da rede. Você só descobre quando precisa usar. E aí é tarde.",
     iconBg: "bg-orange-50",
     iconColor: "text-orange-500",
     accent: "border-l-orange-400",
   },
   {
     icon: DollarSign,
-    title: "Alto custo, baixo retorno",
+    title: "Cobertura cheia de exceções",
     description:
-      "Reajustes anuais acima da inflação com qualidade de cobertura que não justifica o investimento.",
+      "No papel parece completo. Na hora de usar, tem carência, tem glosa, tem exceção que ninguém mencionou quando você assinou.",
     iconBg: "bg-yellow-50",
     iconColor: "text-yellow-600",
     accent: "border-l-yellow-400",
   },
   {
     icon: HeartCrack,
-    title: "Colaboradores insatisfeitos",
+    title: "Reajuste por faixa etária",
     description:
-      "Benefício que deveria ser diferencial virou fonte de frustração e reclamação interna.",
+      "Além do reajuste anual da ANS, ainda tem o reajuste por idade. Com o tempo, a parcela dobra — e a cobertura continua a mesma.",
     iconBg: "bg-pink-50",
     iconColor: "text-pink-500",
     accent: "border-l-pink-400",
   },
   {
     icon: UserX,
-    title: "Perda de talentos",
+    title: "Plano mal dimensionado para sua família",
     description:
-      "Profissionais qualificados aceitam propostas da concorrência que oferecem melhores benefícios de saúde.",
+      "Você contratou um plano pensando em você. Com cônjuge e filhos, o perfil de uso muda — e o plano pode não ter sido feito para isso.",
     iconBg: "bg-purple-50",
     iconColor: "text-purple-500",
     accent: "border-l-purple-400",
   },
   {
     icon: AlertTriangle,
-    title: "Burocracia sem fim",
+    title: "Sem suporte real quando você precisa",
     description:
-      "Processos lentos de implantação, inclusão de dependentes e resolução de glosas que consomem energia do seu time.",
+      "Autorização negada, reembolso travado, prazo extrapolado. Você liga, espera na fila — e não resolve nada.",
     iconBg: "bg-slate-100",
     iconColor: "text-slate-500",
     accent: "border-l-slate-400",
   },
   {
     icon: TrendingDown,
-    title: "Sensação de abandono",
+    title: "Sensação de estar jogando dinheiro fora",
     description:
-      "Após a assinatura do contrato, você se torna apenas mais um número. Sem follow-up, sem gestão proativa.",
+      "Você paga todo mês, há anos, e quando vai usar parece que o plano faz tudo para dificultar. Isso não deveria ser assim.",
     iconBg: "bg-red-50",
     iconColor: "text-red-400",
     accent: "border-l-red-300",
@@ -105,14 +105,14 @@ export function Problems() {
         >
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-1.5 text-sm text-red-600 font-medium">
             <AlertTriangle className="h-3.5 w-3.5" />
-            O problema que ninguém resolve
+            8 armadilhas que a operadora nunca te conta
           </div>
           <h2 className="text-3xl font-bold text-[#111948] md:text-4xl lg:text-5xl">
-            Sua empresa merece mais{" "}
-            <span className="text-slate-400">do que isso.</span>
+            Reajuste todo ano. Cobertura que ninguém explica.{" "}
+            <span className="text-slate-400">Uma parcela que só cresce.</span>
           </h2>
           <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
-            A maioria das empresas está presa em ciclos de frustração com planos de saúde que custam caro e entregam pouco. Você se identifica?
+            Se você tem plano de saúde há mais de 3 anos, provavelmente já passou por pelo menos um desses. Você se reconhece?
           </p>
         </motion.div>
 
@@ -143,8 +143,8 @@ export function Problems() {
         >
           <div className="inline-block rounded-2xl border border-[#111948]/10 bg-white px-8 py-5 shadow-sm">
             <p className="text-lg text-slate-600 font-medium max-w-2xl">
-              E se existisse uma parceira que resolvesse todos esses problemas,{" "}
-              <span className="text-[#111948] font-bold">de forma proativa e humanizada?</span>
+              E se você pudesse saber exatamente se está no plano certo —{" "}
+              <span className="text-[#111948] font-bold">e quanto poderia estar economizando todo mês?</span>
             </p>
           </div>
         </motion.div>

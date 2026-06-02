@@ -1,74 +1,74 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, Quote, Building2 } from "lucide-react";
+import { Star, Quote, Users } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Rafaela Mendonça",
-    role: "Head de RH",
-    company: "Nexus Tech",
-    segment: "Tecnologia · 45 colaboradores",
+    name: "Ana Paula Ferreira",
+    role: "Professora",
+    company: "Família de 4 pessoas",
+    segment: "São Paulo · Plano há 5 anos",
     content:
-      "Antes da Fidele, meu RH passava horas por semana lidando com problemas do plano de saúde. Hoje tenho um consultor que resolve tudo. A qualidade do atendimento é incomparável com o que tínhamos antes.",
+      "Estava pagando R$ 1.800 por mês pelo mesmo plano faz 4 anos. A Fidele me mostrou uma alternativa com a mesma rede, incluindo Einstein, por R$ 400 a menos. O processo foi simples e sem burocracia nenhuma.",
     rating: 5,
-    highlight: "Reduzimos em 80% o tempo do RH com gestão de saúde.",
-    initials: "RM",
+    highlight: "Economia de R$ 400/mês com a mesma rede.",
+    initials: "AF",
   },
   {
-    name: "Carlos Drummond",
-    role: "CEO",
-    company: "Advocacia Drummond & Partners",
-    segment: "Jurídico · 28 colaboradores",
+    name: "Ricardo Nogueira",
+    role: "Engenheiro",
+    company: "Família de 3 pessoas",
+    segment: "Campinas · Plano há 6 anos",
     content:
-      "Trocamos de corretora após anos de frustração. A diferença é absurda. A Fidele faz o que promete: presença real, solução rápida e um plano que meus sócios e funcionários realmente elogiam.",
+      "Nunca tinha questionado o plano. Quando a Fidele fez a análise, descobri que tinha cobertura duplicada com uma carência que eu nem sabia. Encontramos um plano mais adequado — e mais barato.",
     rating: 5,
-    highlight: "Colaboradores elogiam o plano pela primeira vez.",
-    initials: "CD",
+    highlight: "Encontrou cobertura duplicada que eu pagava sem saber.",
+    initials: "RN",
   },
   {
-    name: "Marina Costa",
-    role: "Diretora de Pessoas",
-    company: "Vivo Clínica",
-    segment: "Saúde · 62 colaboradores",
+    name: "Carla Monteiro",
+    role: "Médica",
+    company: "Família de 5 pessoas",
+    segment: "São Paulo · Plano há 8 anos",
     content:
-      "A Fidele nos ajudou a negociar um contrato 18% mais barato com uma cobertura muito superior. E quando precisamos de apoio, eles estão lá. Isso vale muito para uma equipe de saúde exigente.",
+      "Como médica, sabia o que queria — Sírio-Libanês na rede e boa cobertura de exames. A Fidele encontrou um plano que atende tudo isso por um preço que não me fez pagar por cobertura que eu nunca usaria.",
     rating: 5,
-    highlight: "18% de economia com cobertura superior.",
-    initials: "MC",
+    highlight: "Sírio-Libanês na rede com custo otimizado.",
+    initials: "CM",
   },
   {
-    name: "Thiago Balbino",
-    role: "CFO",
-    company: "Balbino Consultores",
-    segment: "Consultoria · 17 colaboradores",
+    name: "Marcos Alves",
+    role: "Empresário",
+    company: "Família de 4 pessoas",
+    segment: "Santo André · Plano há 4 anos",
     content:
-      "Como CFO, me preocupava o custo. A Fidele me apresentou uma análise de ROI que mostrou como o benefício premium impacta diretamente na retenção. Hoje entendo que não é custo, é investimento.",
+      "O reajuste veio de R$ 2.100 para R$ 2.600 sem nenhuma explicação. Liguei pra Fidele, fizeram o diagnóstico e em duas semanas eu tinha um plano melhor por R$ 1.900. Não tem por que não fazer.",
     rating: 5,
-    highlight: "ROI comprovado em retenção de talentos.",
-    initials: "TB",
+    highlight: "De R$ 2.600 para R$ 1.900 com cobertura superior.",
+    initials: "MA",
   },
   {
-    name: "Fernanda Luz",
-    role: "Gerente de RH",
-    company: "EduTech Brasil",
-    segment: "Educação · 38 colaboradores",
+    name: "Juliana Costa",
+    role: "Advogada",
+    company: "Família de 3 pessoas",
+    segment: "São Paulo · Plano há 3 anos",
     content:
-      "Nossa startup cresceu rápido e precisávamos de um benefício de saúde que crescesse conosco. A Fidele entendeu nossa dinâmica e entregou uma solução escalável com atendimento premium.",
+      "Tinha medo de mudar e perder a cobertura. A Fidele me mostrou exatamente o que cada alternativa cobria antes de eu decidir. No final migrei com tranquilidade e economizei R$ 350 por mês.",
     rating: 5,
-    highlight: "Solução que cresce junto com a empresa.",
+    highlight: "Economizou R$ 350/mês sem abrir mão da cobertura.",
+    initials: "JC",
+  },
+  {
+    name: "Fernando Lima",
+    role: "Contador",
+    company: "Família de 5 pessoas",
+    segment: "São Paulo · Plano há 7 anos",
+    content:
+      "Família grande, plano caro. Sempre achei que tinha pouca opção. A Fidele comparou todas as operadoras e encontrou algo que eu nunca teria achado sozinho — com Fleury na rede e valor bem mais razoável.",
+    rating: 5,
+    highlight: "Fleury na rede com R$ 500 de economia mensal.",
     initials: "FL",
-  },
-  {
-    name: "Paulo Saraiva",
-    role: "Sócio-fundador",
-    company: "Saraiva & Filhos Holding",
-    segment: "Holding · 54 colaboradores",
-    content:
-      "Temos colaboradores muito exigentes. A Fidele nos conectou com a Omint e o resultado foi imediato: zero reclamações sobre o plano de saúde. Isso não tem preço para o clima da empresa.",
-    rating: 5,
-    highlight: "Zero reclamações sobre saúde em 12 meses.",
-    initials: "PS",
   },
 ];
 
@@ -98,15 +98,14 @@ export function SocialProof() {
         >
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#FFCC00]/40 bg-[#FFCC00]/10 px-4 py-1.5 text-sm text-[#111948] font-medium">
             <Star className="h-3.5 w-3.5 fill-[#FFCC00] text-[#FFCC00]" />
-            Prova social
+            Quem já fez o diagnóstico
           </div>
           <h2 className="text-3xl font-bold text-[#111948] md:text-4xl lg:text-5xl">
-            Empresas que confiam na Fidele{" "}
+            Famílias que revisaram o plano com a Fidele{" "}
             <span className="text-slate-400">falam por si.</span>
           </h2>
           <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
-            Mais de 300 empresas em São Paulo já transformaram sua experiência
-            com benefícios de saúde. Veja o que elas dizem.
+            Veja o que descobriram — e o que mudou depois do diagnóstico gratuito.
           </p>
 
           {/* Global rating */}
@@ -153,7 +152,7 @@ export function SocialProof() {
               </div>
 
               <div className="mt-3 flex items-center gap-1.5 text-xs text-slate-400">
-                <Building2 className="h-3 w-3" />
+                <Users className="h-3 w-3" />
                 {t.segment}
               </div>
             </motion.div>
